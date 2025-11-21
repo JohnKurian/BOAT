@@ -1,33 +1,65 @@
-## BOAT
+# BOAT: Bayesian Optimization AutoML Time-series Framework
 
-Source code for the 2021 IEEE BigDataService paper ["BOAT: A Bayesian Optimization AutoML Time-series Framework for Industrial Applications"](https://doi.org/10.1109/BigDataService52369.2021.00008).
+Professional, high-quality AutoML framework for time-series forecasting.
 
-## Setting up MLFlow backend
+## Overview
 
-- Download source from github with the folder name "mlflow" at root location
-- Start the server with the following command
+BOAT is a framework designed to automate the process of selecting and tuning time-series forecasting models. It supports various algorithms including:
+- **Deep Learning**: LSTM (Univariate & Multivariate), TCN, N-Beats
+- **Machine Learning**: Random Forest, KNN (via sktime)
+- **Statistical**: Theta Forecaster
+
+## Architecture
+
+The project is structured as a Python package `boat` with the following components:
+- `boat.core`: Core engine for running AutoML pipelines.
+- `boat.models`: Implementations of forecasting models.
+- `boat.api`: Flask-based REST API for managing experiments.
+- `boat.ui`: Streamlit-based user interface.
+- `boat.utils`: Utility modules for database, metrics, etc.
+
+## Installation
+
+1. Clone the repository.
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. Set up environment variables:
+   Copy `.env.example` to `.env` and update the values if necessary.
+   ```bash
+   cp .env.example .env
+   ```
+
+## Usage
+
+### Starting the Backend (API)
+The API handles experiment creation and management.
+```bash
+python -m boat.api.app
 ```
+The API will be available at `http://localhost:8000`.
+
+### Starting the Frontend (UI)
+The UI allows you to interact with the framework, create experiments, and visualize results.
+```bash
+streamlit run boat/ui/streamlit_app.py
+```
+The UI will be available at `http://localhost:8501`.
+
+### Starting MLFlow
+MLFlow is used for experiment tracking.
+```bash
 mlflow server --backend-store-uri sqlite:///mlruns.db --default-artifact-root ./mlruns
 ```
-- To run the MLFlow UI, in mlflow/server/js, run the following command
-```
-npm start --host 0.0.0.0
+
+## Development
+
+### Running Tests
+(To be implemented)
+```bash
+pytest tests/
 ```
 
-## Starting the backend
-```
-flask run --with-threads
-```
-
-## Starting BOAT frontend
-```
-cd flask-react-app
-npm start  
-```
-
-## Ports
-mlflow UI --> 3000
-mlflow server --> 5000
-flask server --> 8000
-BOAT frontend --> 4000
-model server --> 8080
+## Legacy Code
+Old implementation files have been moved to `legacy_code/` for reference.

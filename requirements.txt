@@ -11,4 +11,8 @@ mlflow==1.13.1
 Flask==1.1.1
 Flask-Compress==1.8.0
 Flask-Cors==3.0.10
-python-dotenv-0.15.0
+python-dotenv==0.15.0
+pandas
+numpy
+scikit-learn
+nbeats-forecast
